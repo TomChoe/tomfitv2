@@ -1,5 +1,11 @@
 # tomfitv2
 
-# Started a react-native version years ago and now building using React 18 with no backend service
+Another application to continue building and maintaining React knowledge
 
-# RAPIDAPI
+- React 18
+
+- No Backend
+
+- Rapid API
+
+- Material UI
