@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, Select, TextField, Typography, MenuItem, InputLabel } from '@mui/material';
 import { exerciseOptions, fetchData } from '../utils/fetchData';
+import HorizontalScrollbar from './HorizontalScrollbar';
 
 const SearchExercises = () => {
-
   const [search, setSearch] = useState('')
+  const [exercises, setExercises] = useState([]);
 
   const handleSearch = async () => {
     if(search) {
-      const exerciseData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions);
-      console.log(exerciseData);
+      const exerciseData = await fetchData('https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises', exerciseOptions);
+      setExercises(exerciseData);
+      setSearch('');
     }
+  }
+
+  const urlBuilder = () => {
+    // build url to append to api above
+  
   }
 
   return (
@@ -19,6 +26,13 @@ const SearchExercises = () => {
         Exercises for fitness and improving your body
       </Typography>
       <Box position="relative" mb="72px">
+        <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
+        <Select>
+          <MenuItem>beginner</MenuItem>
+          <MenuItem>intermediate</MenuItem>
+          <MenuItem>expert</MenuItem>
+        </Select>
+
         <TextField
           sx={{
             input: { fontWeight: '700', border: 'none', borderRadius: '4px' },
@@ -48,8 +62,11 @@ const SearchExercises = () => {
           Search
         </Button>
       </Box>
+      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
+        <HorizontalScrollbar />
+      </Box>
     </Stack>
   )
 }
 
-export default SearchExercises
+export default SearchExercises;
